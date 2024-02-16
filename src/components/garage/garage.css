@@ -1,0 +1,75 @@
+.garage {
+  height: auto;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  padding: 0 0 0 30px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.option__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.option__input {
+  width: 240px;
+  height: 30px;
+  border: none;
+  border-radius: 8px;
+  padding: 0 10px;
+  font-size: 22px;
+}
+
+.option__input__color {
+  width: 30px;
+  border: none;
+  border-radius: 8px;
+  position: relative;
+  left: -40px;
+}
+
+.option {
+  display: flex;
+}
+
+.update-car {
+  margin-bottom: 10px;
+}
+
+.option__race {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.button-additional {
+  background: rgb(226, 202, 15);
+  color: black;
+}
+
+.button-additional:hover {
+  background: rgb(188, 168, 15);
+}
+
+.option__race {
+  display: flex;
+}
+
+.button-default {
+  background: rgb(47, 45, 38);
+}
+
+h2 {
+  color: white;
+  font-size: 34px;
+}

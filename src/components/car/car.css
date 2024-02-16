@@ -1,0 +1,47 @@
+.car {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 30px;
+}
+
+.car__options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.car__buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.button-car {
+  height: 30px;
+  width: 120px;
+  font-size: 18px;
+  background: rgb(107, 9, 182);
+  border-radius: 20px;
+}
+
+.button-basic {
+  height: 35px;
+  width: 50px;
+  font-size: 16px;
+  background: rgb(226, 202, 15);
+  color: black;
+}
+
+.car__wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.car__name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+}
