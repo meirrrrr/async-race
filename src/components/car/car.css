@@ -7,7 +7,8 @@
 .car__options {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  margin-bottom: 30px;
+  gap: 15px;
 }
 
 .car__buttons {
@@ -24,12 +25,20 @@
   border-radius: 20px;
 }
 
+.button-car:hover {
+  background: rgb(85, 8, 145);
+}
+
 .button-basic {
   height: 35px;
   width: 50px;
   font-size: 16px;
   background: rgb(226, 202, 15);
   color: black;
+}
+
+.button-basic:hover {
+  background: rgb(183, 163, 14);
 }
 
 .car__wrapper {

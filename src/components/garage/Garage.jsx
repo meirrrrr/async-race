@@ -7,22 +7,16 @@ const baseURL = "http://localhost:3000";
 export default function Garage() {
   const [carName, setCarName] = useState(null);
   const [carColor, setCarColor] = useState(null);
-  const [cars, setCars] = useState(null);
 
-  useEffect(() => {
-    axios.get(`${baseURL}/garage`).then((response) => {
-      setCars(response.data);
-    });
-  }, []);
-
-  function createPost() {
+  function createCar() {
+    const url = `${baseURL}/garage`;
     axios
-      .post(`${baseURL}/garage`, {
+      .post(`${url}`, {
         name: carName,
         color: carColor,
       })
-      .then((response) => {
-        setCars(response.data);
+      .then(() => {
+        console.log("Car created");
       });
   }
 
@@ -42,11 +36,12 @@ export default function Garage() {
                   className="option__input__color create-car__color"
                   type="color"
                   onChange={(e) => setCarColor(e.target.value)}
+                  defaultValue="#FF4433"
                 />
               </div>
               <button
                 className="button button-additional create-car__button"
-                onClick={createPost}
+                onClick={createCar}
               >
                 Create
               </button>
@@ -60,6 +55,7 @@ export default function Garage() {
                 <input
                   className="option__input__color update-car__color"
                   type="color"
+                  defaultValue="#800080"
                 />
               </div>
               <button className="button button-additional update-car__button">
