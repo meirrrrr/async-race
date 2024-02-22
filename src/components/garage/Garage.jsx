@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./garage.css";
 import "./car.css";
 import carImage from "./car.svg";
+import GenerateCars from "./GenerateCars";
 
 const baseURL = "http://localhost:3000";
 
@@ -13,6 +14,15 @@ export default function Garage() {
   const [updatedCarName, setUpdatedCarName] = useState(null);
   const [updatedCarColor, setUpdatedCarColor] = useState(null);
   const [updatedCarId, setUpdatedCarId] = useState(null);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [carsPerPage, setCarsPerPage] = useState(7);
+
+  // GET CURRENT POST
+  const indexOfLastPost = currentPage * carsPerPage;
+  const indexOfFirstPost = indexOfLastPost - carsPerPage;
+  console.log(indexOfFirstPost, indexOfLastPost);
+  const currentCars = cars.slice(indexOfFirstPost, indexOfLastPost);
 
   // GET CARS
   useEffect(() => {
@@ -30,12 +40,18 @@ export default function Garage() {
         name: carName,
         color: carColor,
       })
-      .then(() => {
+      .then((response) => {
+        const newCar = response.data;
+        setCars((prevCars) => [...prevCars, newCar]);
         console.log("Car created");
       });
   }
 
-  console.log(updatedCarId);
+  async function getCarNameById(id) {
+    const url = `${baseURL}/garage/${id}`;
+    const response = await axios.get(`${url}`);
+    return response.data;
+  }
 
   function updateCar() {
     const url = `${baseURL}/garage/${updatedCarId}`;
@@ -90,6 +106,7 @@ export default function Garage() {
             <div className="option update-car">
               <div className="option__wrapper">
                 <input
+                  id="updateCar"
                   className="option__input option__input_text update-car__name"
                   type="text"
                   onChange={(e) => setUpdatedCarName(e.target.value)}
@@ -115,9 +132,7 @@ export default function Garage() {
               <button className="button option__button button-default reset">
                 Reset
               </button>
-              <button className="button option__button button-default generate-cars">
-                Generate Cars
-              </button>
+              <GenerateCars />
             </div>
           </div>
           <h2 className="heading">
@@ -126,12 +141,18 @@ export default function Garage() {
         </div>
       </div>
       <div className="car">
-        {cars.map((car) => (
+        {currentCars.map((car) => (
           <div className="car__options" key={car.id}>
             <div className="car__buttons">
               <button
                 className="button button-car buttonSelect"
-                onClick={() => setUpdatedCarId(car.id)}
+                onClick={() => {
+                  setUpdatedCarId(car.id);
+                  const inputElement = document.getElementById("updateCar");
+                  const carName = getCarNameById(car.id);
+                  console.log(carName);
+                  inputElement.value = carName;
+                }}
               >
                 select
               </button>
