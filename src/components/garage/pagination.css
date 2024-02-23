@@ -1,0 +1,11 @@
+ul {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  list-style-type: none;
+}
+
+.page-item {
+  width: 100%;
+  padding: 10px;
+}

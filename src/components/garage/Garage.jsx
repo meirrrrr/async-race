@@ -4,6 +4,9 @@ import "./garage.css";
 import "./car.css";
 import carImage from "./car.svg";
 import GenerateCars from "./GenerateCars";
+import GenerateCar from "./GenerateCar";
+import Pagination from "./Pagination";
+import brands from "./carBrands";
 
 const baseURL = "http://localhost:3000";
 
@@ -16,13 +19,21 @@ export default function Garage() {
   const [updatedCarId, setUpdatedCarId] = useState(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage, setCarsPerPage] = useState(7);
+  const carsPerPage = 7;
+  const nPages = Math.ceil(cars.length / carsPerPage);
 
   // GET CURRENT POST
   const indexOfLastPost = currentPage * carsPerPage;
   const indexOfFirstPost = indexOfLastPost - carsPerPage;
   console.log(indexOfFirstPost, indexOfLastPost);
   const currentCars = cars.slice(indexOfFirstPost, indexOfLastPost);
+  //
+
+  // PAGINATION
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //
 
   // GET CARS
   useEffect(() => {
@@ -75,6 +86,28 @@ export default function Garage() {
       });
   }
 
+  const generateCar = async () => {
+    const name = brands[Math.floor(Math.random() * brands.length)];
+    const color = generateRandomHexColor();
+
+    axios
+      .post(`${baseURL}/garage`, {
+        name: name,
+        color: color,
+      })
+      .then((response) => {
+        const newCar = response.data;
+        setCars((prevCars) => [...prevCars, newCar]);
+        console.log("Car created");
+      });
+
+    const generateRandomHexColor = () => {
+      const randomColor = Math.floor(Math.random() * 16777215);
+      const hexColor = "#" + randomColor.toString(16).padStart(6, "0");
+      return hexColor;
+    };
+  };
+
   if (!cars) return "No car";
 
   return (
@@ -98,7 +131,16 @@ export default function Garage() {
               </div>
               <button
                 className="button button-additional create-car__button"
-                onClick={createCar}
+                onClick={() => {
+                  const inputElement =
+                    document.getElementById("create-car__name");
+                  if (inputElement) {
+                    console.log("generated");
+                    generateCar();
+                  } else {
+                    createCar();
+                  }
+                }}
               >
                 Create
               </button>
@@ -136,8 +178,14 @@ export default function Garage() {
             </div>
           </div>
           <h2 className="heading">
-            Garage (<span className="garage__carsTotal"></span>)
+            Garage (<span className="garage__carsTotal">{cars.length}</span>)
           </h2>
+          <Pagination
+            nPages={nPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            paginate={paginate}
+          />
         </div>
       </div>
       <div className="car">
