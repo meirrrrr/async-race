@@ -1,46 +1,7 @@
 import axios from "axios";
+import brands from "./carBrands";
 
 const baseURL = "http://localhost:3000";
-
-const brands = [
-  "Toyota",
-  "Honda",
-  "Ford",
-  "Chevrolet",
-  "BMW",
-  "Audi",
-  "Mercedes-Benz",
-  "Volkswagen",
-  "Tesla",
-  "Subaru",
-  "Nissan",
-  "Lexus",
-  "Mazda",
-  "Jeep",
-  "Hyundai",
-  "Kia",
-  "Volvo",
-  "Porsche",
-  "Ferrari",
-  "Lamborghini",
-  "Rolls-Royce",
-  "Bentley",
-  "Jaguar",
-  "Land Rover",
-  "Maserati",
-  "Aston Martin",
-  "Bugatti",
-  "McLaren",
-  "MINI",
-  "Fiat",
-  "Alfa Romeo",
-  "Chrysler",
-  "Dodge",
-  "Infiniti",
-  "Buick",
-  "Cadillac",
-  "Lincoln",
-];
 
 export default function GenerateCars() {
   const generateCar = async () => {

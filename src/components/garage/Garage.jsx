@@ -4,7 +4,6 @@ import "./garage.css";
 import "./car.css";
 import carImage from "./car.svg";
 import GenerateCars from "./GenerateCars";
-import GenerateCar from "./GenerateCar";
 import Pagination from "./Pagination";
 import brands from "./carBrands";
 
@@ -79,6 +78,7 @@ export default function Garage() {
     axios
       .delete(url)
       .then(() => {
+        setCars(cars.filter((car) => car.id !== id));
         console.log(`Car with id ${id} deleted`);
       })
       .catch((error) => {
@@ -180,12 +180,6 @@ export default function Garage() {
           <h2 className="heading">
             Garage (<span className="garage__carsTotal">{cars.length}</span>)
           </h2>
-          <Pagination
-            nPages={nPages}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            paginate={paginate}
-          />
         </div>
       </div>
       <div className="car">
@@ -227,6 +221,12 @@ export default function Garage() {
             </div>
           </div>
         ))}
+        <Pagination
+          nPages={nPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

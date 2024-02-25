@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./pagination.css";
 
 export default function Pagination({
@@ -19,7 +20,7 @@ export default function Pagination({
   return (
     <div className="paginator">
       <ul>
-        <li className="page-item">
+        <li className="page-item but">
           <a href="!#" onClick={goToPrevPage}>
             Prev
           </a>
@@ -31,9 +32,9 @@ export default function Pagination({
             </a>
           </li>
         ))}
-        <li className="page-item">
+        <li className="page-item but">
           <a href="!#" onClick={goToNextPage}>
-            Prev
+            Next
           </a>
         </li>
       </ul>
